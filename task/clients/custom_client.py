@@ -61,24 +61,6 @@ class DialClient:
         async with aiohttp.ClientSession() as session:
 
             # 5. Inside session, make POST request using session.post() with:
-            async with session.post(self._endpoint, json=request_data, headers=headers) as response:
-                if response.status == 200:
-                    # 6. Get content from chunks (don't forget that chunk start with `data: `,
-                    #   final chunk is `data: [DONE]`), print chunks, collect them and return as assistant message
-                    async for line in response.content:
-                        line_str = line.decode('utf-8').strip()
-                        if line_str.startswith("data: "):
-                            data = line_str[6:].strip()
-                            if data != "[DONE]":
-                                content_snippet = self._get_content_snippet(data)
-                                print(content_snippet, end='')
-                                contents.append(content_snippet)
-                            else:
-                                print()
-                else:
-                    error_text = await response.text()
-                    print(f"{response.status} {error_text}")
-                return Message(role=Role.AI, content=''.join(contents))
 
     def get_headers(self) -> dict[str, str]:
         headers = {
