@@ -34,7 +34,7 @@ async def start(stream: bool) -> None:
     await ai_conversation(conversation, dial_client, stream)
 
     # 10. In CustomDialClient add print of whole request and response to see what you send and what you get in response
-
+    print("this isn't yet implemented")
 
 async def ai_conversation(conversation: Conversation, custom_dial_client: DialClient, stream: bool):
     # 4. Use infinite cycle (while True) and get yser message from console
