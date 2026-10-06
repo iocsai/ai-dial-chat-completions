@@ -32,7 +32,6 @@ class DialClient(BaseClient):
                 return Message(Role.AI, message.content)
 
         # 3. If choices are not present then raise Exception("No choices in response found")
-        raise Exception("No choices in response found")
 
     async def stream_completion(self, messages: list[Message]) -> Message:
         # 1. Create chat completions with async client
@@ -46,13 +45,6 @@ class DialClient(BaseClient):
         contents = []
 
         # 3. Make async loop from `chunks` (from 1st step)
-        async for chunk in chunks:
-            if chunk.choices and len(chunk.choices) > 0:
-                delta = chunk.choices[0].delta
-                if delta and delta.content:
-                    # 4. Print content chunk and collect it contents array
-                    print(delta.content, end='')
-                    contents.append(delta.content)
 
         # 5. Print empty row `print()` (it will represent the end of streaming and in console we will print input from a new line)
         print()
